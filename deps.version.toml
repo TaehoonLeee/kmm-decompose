@@ -1,0 +1,24 @@
+[versions]
+
+kotlin = "1.5.31"
+androidGradle = "7.0.3"
+kotlinxSerialization = "1.2.2"
+coroutines = "1.5.2"
+koin = "3.1.2"
+sqldelight = "1.5.0"
+decompose = "0.3.1"
+reaktive = "1.1.22"
+mviKotlin = "3.0.0-alpha02"
+
+[libraries]
+
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlinx-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradle" }
+sqldelight-gradle-plugin = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqldelight" }
+decompose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-extension-compose = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
+reaktive = { module = "com.badoo.reaktive:reaktive", version.ref = "reaktive" }
+mviKotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mviKotlin" }

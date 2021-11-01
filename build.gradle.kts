@@ -5,8 +5,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
-        classpath("com.android.tools.build:gradle:7.0.3")
+        val deps = project.extensions.getByType<VersionCatalogsExtension>().named("deps") as org.gradle.accessors.dm.LibrariesForDeps
+        classpath(deps.android.gradle.plugin)
+        classpath(deps.kotlin.gradle.plugin)
+        classpath(deps.kotlinx.serialization.plugin)
+        classpath(deps.sqldelight.gradle.plugin)
     }
 }
 

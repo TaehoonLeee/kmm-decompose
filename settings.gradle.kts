@@ -6,6 +6,16 @@ pluginManagement {
     }
 }
 
+enableFeaturePreview("VERSION_CATALOGS")
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("deps") {
+            from(files("deps.version.toml"))
+        }
+    }
+}
+
 rootProject.name = "Decompose_Sample"
 include(":androidApp")
 include(":shared")
