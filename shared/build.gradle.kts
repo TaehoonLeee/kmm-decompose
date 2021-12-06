@@ -45,6 +45,8 @@ kotlin {
                 implementation(deps.decompose.extension.compose)
                 implementation(deps.reaktive)
                 implementation(deps.mviKotlin)
+                implementation(deps.koin.core)
+                api(deps.gitliveFirebase.auth)
             }
         }
         val commonTest by getting
@@ -70,38 +72,40 @@ configurations {
     }
 }
 
-dependencies {
-    add("composeCompiler", "androidx.compose.compiler:compiler:1.1.0-beta01")
-}
+apply(plugin = "com.google.gms.google-services")
 
-afterEvaluate {
-    val composeCompilerJar =
-        project
-            .configurations
-            .getByName("composeCompiler")
-            .resolve()
-            .firstOrNull()
-            ?: throw Exception("Please add \"androidx.compose.compiler:compiler\" (and only that) as a \"composeCompiler\" dependency")
+//dependencies {
+//    add("composeCompiler", "androidx.compose.compiler:compiler:1.1.0-beta02")
+//}
 
-    project.tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.freeCompilerArgs += listOf("-Xuse-ir", "-Xplugin=$composeCompilerJar")
-    }
-}
+//afterEvaluate {
+//    val composeCompilerJar =
+//        project
+//            .configurations
+//            .getByName("composeCompiler")
+//            .resolve()
+//            .firstOrNull()
+//            ?: throw Exception("Please add \"androidx.compose.compiler:compiler\" (and only that) as a \"composeCompiler\" dependency")
+//
+//    project.tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+//        kotlinOptions.freeCompilerArgs += listOf("-Xuse-ir", "-Xplugin=$composeCompilerJar")
+//    }
+//}
 
-fun getIosTarget(): String {
-    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
-
-    return if (sdkName.startsWith("iphoneos")) "iosArm64" else "iosX64"
-}
-
-val packForXcode by tasks.creating(Sync::class) {
-    group = "build"
-    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val targetName = getIosTarget()
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
-    inputs.property("mode", mode)
-    dependsOn(framework.linkTask)
-    val targetDir = File(buildDir, "xcode-frameworks")
-    from(framework.outputDirectory)
-    into(targetDir)
-}
+//fun getIosTarget(): String {
+//    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
+//
+//    return if (sdkName.startsWith("iphoneos")) "iosArm64" else "iosX64"
+//}
+//
+//val packForXcode by tasks.creating(Sync::class) {
+//    group = "build"
+//    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
+//    val targetName = getIosTarget()
+//    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
+//    inputs.property("mode", mode)
+//    dependsOn(framework.linkTask)
+//    val targetDir = File(buildDir, "xcode-frameworks")
+//    from(framework.outputDirectory)
+//    into(targetDir)
+//}

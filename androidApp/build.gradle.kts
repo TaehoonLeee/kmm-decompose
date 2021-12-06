@@ -8,6 +8,11 @@ dependencies {
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+
+    implementation(deps.kotlinx.coroutines)
+    implementation(deps.koin.core)
+    implementation(deps.koin.android)
+    implementation(deps.google.service.auth)
 }
 
 android {

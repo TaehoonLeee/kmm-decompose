@@ -1,6 +1,6 @@
 [versions]
 
-kotlin = "1.5.31"
+kotlin = "1.6.0"
 androidGradle = "7.0.3"
 kotlinxSerialization = "1.2.2"
 coroutines = "1.5.2"
@@ -9,6 +9,9 @@ sqldelight = "1.5.0"
 decompose = "0.3.1"
 reaktive = "1.1.22"
 mviKotlin = "3.0.0-alpha02"
+gitliveFirebase = "1.4.3"
+googleService = "4.3.10"
+gmsAuth = "19.2.0"
 
 [libraries]
 
@@ -22,3 +25,8 @@ decompose-decompose = { module = "com.arkivanov.decompose:decompose", version.re
 decompose-extension-compose = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 reaktive = { module = "com.badoo.reaktive:reaktive", version.ref = "reaktive" }
 mviKotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mviKotlin" }
+gitliveFirebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "gitliveFirebase" }
+google-service-plugin = { module = "com.google.gms:google-services", version.ref = "googleService" }
+google-service-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "gmsAuth" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
