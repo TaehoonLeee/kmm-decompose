@@ -18,15 +18,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val authUseCase: FirebaseAuthUseCase = get()
-    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestEmail()
-        .build()
-    private val googleSignInClient = GoogleSignIn.getClient(this, gso)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
         val tv: Button = findViewById(R.id.auth_btn)
 
         tv.setOnClickListener {
@@ -40,10 +42,12 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+
             val account = task.getResult(ApiException::class.java)
-            runBlocking {
-                val result = authUseCase(account.idToken)
-                println(result)
+            if (account.idToken != null) {
+                runBlocking {
+                    authUseCase(account.idToken)
+                }
             }
         }
     }
