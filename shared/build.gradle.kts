@@ -72,8 +72,6 @@ configurations {
     }
 }
 
-apply(plugin = "com.google.gms.google-services")
-
 //dependencies {
 //    add("composeCompiler", "androidx.compose.compiler:compiler:1.1.0-beta02")
 //}
