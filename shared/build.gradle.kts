@@ -35,7 +35,7 @@ kotlin {
             podfile = project.file("../iosApp/Podfile")
         }
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -46,6 +46,7 @@ kotlin {
                 implementation(deps.reaktive)
                 implementation(deps.mviKotlin)
                 implementation(deps.koin.core)
+                implementation(deps.bundles.ktor)
                 api(deps.gitliveFirebase.auth)
             }
         }
