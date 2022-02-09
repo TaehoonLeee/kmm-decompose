@@ -30,7 +30,7 @@ kotlin {
             baseName = "shared"
             linkerOpts.add("-lsqlite3")
             export(deps.decompose.decompose)
-            export(deps.mviKotlin)
+            export(deps.bundles.mviKotlin)
             transitiveExport = true
             podfile = project.file("../iosApp/Podfile")
         }
@@ -44,10 +44,9 @@ kotlin {
                 implementation(deps.decompose.decompose)
                 implementation(deps.decompose.extension.compose)
                 implementation(deps.reaktive)
-                implementation(deps.mviKotlin)
                 implementation(deps.koin.core)
                 implementation(deps.bundles.ktor)
-                api(deps.gitliveFirebase.auth)
+                implementation(deps.bundles.mviKotlin)
             }
         }
         val commonTest by getting

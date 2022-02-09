@@ -1,23 +1,50 @@
 package com.example.decomposesample.di
 
-import com.example.decomposesample.data.repository.FirebaseRepositoryImpl
-import com.example.decomposesample.data.repository.UnsplashRepositoryImpl
-import com.example.decomposesample.data.service.FirebaseApiExecutor
-import com.example.decomposesample.domain.interactor.FirebaseAuthUseCase
-import com.example.decomposesample.domain.interactor.GetSearchListUseCase
-import com.example.decomposesample.domain.interfaces.repository.FirebaseRepository
-import com.example.decomposesample.domain.interfaces.repository.UnsplashRepository
-import com.example.decomposesample.domain.interfaces.service.FirebaseService
+import com.example.decomposesample.data.network.NetworkTmdbDataSource
+import com.example.decomposesample.data.repository.TmdbRepositoryImpl
+import com.example.decomposesample.domain.interactor.GetMovieListUseCase
+import com.example.decomposesample.domain.interfaces.repository.TmdbRepository
+import io.ktor.client.*
+import io.ktor.client.plugins.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val firebaseModule = module {
-	single<FirebaseService> { FirebaseApiExecutor() }
-	single<FirebaseRepository> { FirebaseRepositoryImpl() }
+val coroutinesModule = module {
+	single(named("mainDispatcher")) {
+		CoroutineScope(SupervisorJob() + Dispatchers.Main)
+	}
+	single(named("defaultDispatcher")) {
+		CoroutineScope(SupervisorJob() + Dispatchers.Default)
+	}
+}
 
-	single<UnsplashRepository> { UnsplashRepositoryImpl() }
+val networkModule = module {
+	single { HttpClient {
+		defaultRequest {
+			url {
+				protocol = URLProtocol.HTTPS
+				host = "api.themoviedb.org/3"
+			}
+		}
+		install(ContentNegotiation) {
+			json()
+		}
+	} }
+
+	single {
+		NetworkTmdbDataSource(get())
+	}
+}
+
+val repositoryModule = module {
+	single<TmdbRepository> { TmdbRepositoryImpl(get()) }
 }
 
 val interactorModule = module {
-	single { FirebaseAuthUseCase(get(), get()) }
-	single { GetSearchListUseCase(get()) }
+	single { GetMovieListUseCase(get()) }
 }
