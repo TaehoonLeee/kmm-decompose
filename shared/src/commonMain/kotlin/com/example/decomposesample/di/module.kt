@@ -8,21 +8,8 @@ import io.ktor.client.*
 import io.ktor.client.plugins.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.json.Json
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
-
-val coroutinesModule = module {
-	single(named("mainDispatcher")) {
-		CoroutineScope(SupervisorJob() + Dispatchers.Main)
-	}
-	single(named("defaultDispatcher")) {
-		CoroutineScope(SupervisorJob() + Dispatchers.Default)
-	}
-}
 
 val networkModule = module {
 	single { HttpClient {
@@ -34,13 +21,7 @@ val networkModule = module {
 		}
 		install(ContentNegotiation) {
 			json(Json {
-				isLenient = true
-				prettyPrint = false
-				encodeDefaults = true
 				ignoreUnknownKeys = true
-				useArrayPolymorphism = false
-				allowStructuredMapKeys = true
-				allowSpecialFloatingPointValues = true
 			})
 		}
 	} }

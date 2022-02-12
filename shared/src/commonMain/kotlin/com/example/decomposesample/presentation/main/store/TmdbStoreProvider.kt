@@ -4,6 +4,7 @@ import com.arkivanov.mvikotlin.core.store.*
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.example.decomposesample.data.entity.Movies
+import com.example.decomposesample.data.entity.status.Result
 import com.example.decomposesample.domain.interactor.GetMovieListUseCase
 import com.example.decomposesample.presentation.main.store.TmdbStore.Intent
 import com.example.decomposesample.presentation.main.store.TmdbStore.State
@@ -27,22 +28,22 @@ internal class TmdbStoreProvider(
         class FetchMovies(val page: Int) : Action()
     }
 
-    private sealed class Result {
+    private sealed class Message {
         data class MoviesFetched(
-            val movies: com.example.decomposesample.data.entity.status.Result<Movies>
-        ) : Result()
+            val movies: Result<Movies>
+        ) : Message()
     }
 
     private class ExecutorImpl :
         KoinComponent,
-        CoroutineExecutor<Intent, Action, State, Result, Nothing>()
+        CoroutineExecutor<Intent, Action, State, Message, Nothing>()
     {
         val getMovieList = get<GetMovieListUseCase>()
 
         override fun executeAction(action: Action, getState: () -> State) {
             when(action) {
                 is Action.FetchMovies -> scope.launch {
-                    dispatch(Result.MoviesFetched(getMovieList(action.page)))
+                    dispatch(Message.MoviesFetched(getMovieList(action.page)))
                 }
             }
         }
@@ -50,15 +51,15 @@ internal class TmdbStoreProvider(
         override fun executeIntent(intent: Intent, getState: () -> State) {
             when(intent) {
                 is Intent.FetchMovies -> scope.launch {
-                    dispatch(Result.MoviesFetched(getMovieList(intent.page)))
+                    dispatch(Message.MoviesFetched(getMovieList(intent.page)))
                 }
             }
         }
     }
 
-    private class ReducerImpl : Reducer<State, Result> {
-        override fun State.reduce(result: Result): State = when (result) {
-            is Result.MoviesFetched -> copy(movies = result.movies)
+    private class ReducerImpl : Reducer<State, Message> {
+        override fun State.reduce(msg: Message): State = when (msg) {
+            is Message.MoviesFetched -> copy(movies = msg.movies)
         }
     }
 }
