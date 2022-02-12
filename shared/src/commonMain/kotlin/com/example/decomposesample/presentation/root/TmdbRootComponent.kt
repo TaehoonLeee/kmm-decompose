@@ -30,5 +30,4 @@ class TmdbRootComponent(
         @Parcelize
         object Main : Configuration()
     }
-
 }

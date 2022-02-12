@@ -9,7 +9,7 @@ koin = "3.1.2"
 sqldelight = "1.5.0"
 decompose = "0.3.1"
 reaktive = "1.1.22"
-mviKotlin = "3.0.0-alpha02"
+mviKotlin = "3.0.0-beta01"
 ktor = "2.0.0-beta-1"
 compose = "1.2.0-alpha02"
 
@@ -30,8 +30,7 @@ reaktive = { module = "com.badoo.reaktive:reaktive", version.ref = "reaktive" }
 
 mviKotlin-mviKotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mviKotlin" }
 mviKotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mviKotlin" }
-mviKotlin-extensionReaktive = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-reaktive", version.ref = "mviKotlin" }
-mviKotlin-rx = { module = "com.arkivanov.mvikotlin:rx", version.ref = "mviKotlin" }
+mviKotlin-extensionCoroutines = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mviKotlin" }
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
@@ -60,8 +59,7 @@ ktor = [
 mviKotlin = [
     "mviKotlin-mviKotlin",
     "mviKotlin-main",
-    "mviKotlin-extensionReaktive",
-    "mviKotlin-rx"
+    "mviKotlin-extensionCoroutines"
 ]
 
 compose = [
