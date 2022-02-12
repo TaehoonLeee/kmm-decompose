@@ -41,7 +41,7 @@ kotlin {
             dependencies {
                 implementation(deps.kotlinx.coroutines)
                 implementation(deps.kotlinx.serialization.json)
-                implementation(deps.decompose.decompose)
+                api(deps.decompose.decompose)
                 implementation(deps.decompose.extension.compose)
                 implementation(deps.reaktive)
                 implementation(deps.koin.core)
@@ -50,7 +50,11 @@ kotlin {
             }
         }
         val commonTest by getting
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(deps.bundles.compose)
+            }
+        }
         val androidTest by getting
         val iosMain by getting
         val iosTest by getting
@@ -72,23 +76,23 @@ configurations {
     }
 }
 
-//dependencies {
-//    add("composeCompiler", "androidx.compose.compiler:compiler:1.1.0-beta02")
-//}
+dependencies {
+    add("composeCompiler", "androidx.compose.compiler:compiler:1.2.0-alpha02")
+}
 
-//afterEvaluate {
-//    val composeCompilerJar =
-//        project
-//            .configurations
-//            .getByName("composeCompiler")
-//            .resolve()
-//            .firstOrNull()
-//            ?: throw Exception("Please add \"androidx.compose.compiler:compiler\" (and only that) as a \"composeCompiler\" dependency")
-//
-//    project.tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-//        kotlinOptions.freeCompilerArgs += listOf("-Xuse-ir", "-Xplugin=$composeCompilerJar")
-//    }
-//}
+afterEvaluate {
+    val composeCompilerJar =
+        project
+            .configurations
+            .getByName("composeCompiler")
+            .resolve()
+            .firstOrNull()
+            ?: throw Exception("Please add \"androidx.compose.compiler:compiler\" (and only that) as a \"composeCompiler\" dependency")
+
+    project.tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.freeCompilerArgs += listOf("-Xuse-ir", "-Xplugin=$composeCompilerJar")
+    }
+}
 
 //fun getIosTarget(): String {
 //    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"

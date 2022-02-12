@@ -15,35 +15,21 @@ data class Movies(
 
 @Serializable
 data class Movie(
-    val id : Long?,
-    val video : Boolean?,
+    val id : Int,
+    val overview : String,
+    val popularity : Double,
     @SerialName("vote_count")
-    val voteCount : Long?,
+    val voteCount : Int,
     @SerialName("vote_average")
-    val voteAverage : Double?,
-    val title : String?,
-    @SerialName("release_date")
-    val releaseDate : String?,
+    val voteAverage : Double,
     @SerialName("original_language")
-    val OriginalLanguage : String?,
+    val OriginalLanguage : String,
     @SerialName("backdrop_path")
     val backdropPath : String?,
-    val adult : Boolean?,
-    @SerialName("overview")
-    val overview : String?,
     @SerialName("poster_path")
     val posterPath : String?,
-    @SerialName("popularity")
-    val popularity : Double?,
     @SerialName("media_type")
-    val mediaType : String?,
-    val genres: List<Genre>?,
-    val runtime : Long?,
-    val credits : Credit?
-)
-
-@Serializable
-data class Genre(
-    val id : Long,
-    val name : String
+    val mediaType : String,
+    @SerialName("genre_ids")
+    val genres: List<Int>
 )

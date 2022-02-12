@@ -11,6 +11,7 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.serialization.json.Json
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -28,11 +29,19 @@ val networkModule = module {
 		defaultRequest {
 			url {
 				protocol = URLProtocol.HTTPS
-				host = "api.themoviedb.org/3"
+				host = "api.themoviedb.org"
 			}
 		}
 		install(ContentNegotiation) {
-			json()
+			json(Json {
+				isLenient = true
+				prettyPrint = false
+				encodeDefaults = true
+				ignoreUnknownKeys = true
+				useArrayPolymorphism = false
+				allowStructuredMapKeys = true
+				allowSpecialFloatingPointValues = true
+			})
 		}
 	} }
 

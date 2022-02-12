@@ -1,6 +1,7 @@
 [versions]
 
-kotlin = "1.6.0"
+kotlin = "1.6.10"
+activity = "1.5.0-alpha01"
 androidGradle = "7.0.3"
 kotlinxSerialization = "1.2.2"
 coroutines = "1.6.0-native-mt"
@@ -9,36 +10,42 @@ sqldelight = "1.5.0"
 decompose = "0.3.1"
 reaktive = "1.1.22"
 mviKotlin = "3.0.0-alpha02"
-gitliveFirebase = "1.4.3"
-googleService = "4.3.10"
-gmsAuth = "19.2.0"
 ktor = "2.0.0-beta-1"
+compose = "1.2.0-alpha02"
 
 [libraries]
-
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradle" }
 sqldelight-gradle-plugin = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqldelight" }
+
 decompose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-extension-compose = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
+
 reaktive = { module = "com.badoo.reaktive:reaktive", version.ref = "reaktive" }
+
 mviKotlin-mviKotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mviKotlin" }
 mviKotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mviKotlin" }
 mviKotlin-extensionReaktive = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-reaktive", version.ref = "mviKotlin" }
 mviKotlin-rx = { module = "com.arkivanov.mvikotlin:rx", version.ref = "mviKotlin" }
-gitliveFirebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "gitliveFirebase" }
-google-service-plugin = { module = "com.google.gms:google-services", version.ref = "googleService" }
-google-service-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "gmsAuth" }
+
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-okHttp = { module = "io.ktor:ktor-client-okhttp", version.ref= "ktor" }
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-ktor-okHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose"}
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose"}
+compose-material = { module = "androidx.compose.material:material", version.ref = "compose"}
+compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose"}
 
 [bundles]
 
@@ -55,4 +62,11 @@ mviKotlin = [
     "mviKotlin-main",
     "mviKotlin-extensionReaktive",
     "mviKotlin-rx"
+]
+
+compose = [
+    "compose-ui",
+     "compose-foundation",
+     "compose-material",
+     "compose-runtime"
 ]

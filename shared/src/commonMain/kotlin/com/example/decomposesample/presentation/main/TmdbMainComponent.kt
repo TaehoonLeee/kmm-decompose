@@ -19,6 +19,10 @@ class TmdbMainComponent(
 
     override val model: Value<Model> = store.asValue().map(::Model)
 
+    init {
+        onGetMovies(1)
+    }
+
     override fun onGetMovies(page: Int) {
         store.accept(TmdbStore.Intent.FetchMovies(page))
     }

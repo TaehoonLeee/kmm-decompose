@@ -14,13 +14,14 @@ class NetworkTmdbDataSource(
     suspend fun getMovieList(page: Int): Result<Movies> {
         return try {
             httpClient
-                .get("trending/all/day") {
+                .get("3/trending/all/day") {
                     parameter("page", page)
-                    parameter("api_key", "")
+                    parameter("api_key", "72a65ce9c10f2d0fe0fd232119fb06be")
                 }
                 .body<Movies>()
                 .toResult()
         } catch (e: Exception) {
+            println(e)
             Result.Error(e.message)
         }
     }
