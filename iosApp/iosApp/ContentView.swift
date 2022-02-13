@@ -9,6 +9,11 @@ struct ContentView: View {
     }
 
 	var body: some View {
-		Text("greet")
+        RootView(componentHolder.component)
+            .onAppear {
+                LifecycleRegistryExtKt.resume(self.componentHolder.lifecycle)
+            }.onDisappear {
+                LifecycleRegistryExtKt.stop(self.componentHolder.lifecycle)
+            }
 	}
 }

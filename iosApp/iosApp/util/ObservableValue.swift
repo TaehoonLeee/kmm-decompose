@@ -21,7 +21,7 @@ public class ObservableValue<T: AnyObject> : ObservableObject {
     init(_ value: Value<T>) {
         self.observableValue = value
         self.value = observableValue.value
-        self.observer = { self.value = $0 }
+        self.observer = { [weak self] value in self?.value = value }
         
         observableValue.subscribe(observer: self.observer!)
     }
