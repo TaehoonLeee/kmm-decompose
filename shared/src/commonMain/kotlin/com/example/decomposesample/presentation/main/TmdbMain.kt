@@ -1,11 +1,11 @@
 package com.example.decomposesample.presentation.main
 
+import com.arkivanov.decompose.value.Value
 import com.example.decomposesample.presentation.main.store.TmdbStore
-import kotlinx.coroutines.flow.Flow
 
 interface TmdbMain {
 
-    val model: Flow<TmdbStore.State>
+    val model: Value<TmdbStore.State>
 
     fun onGetMovies(page: Int)
 }

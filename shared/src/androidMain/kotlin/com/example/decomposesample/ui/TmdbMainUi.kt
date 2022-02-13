@@ -10,7 +10,7 @@ import com.example.decomposesample.presentation.main.store.TmdbStore
 
 @Composable
 fun TmdbMainContent(component: TmdbMain) {
-    val model by component.model.collectAsState(TmdbStore.State())
+    val model by component.model.subscribeAsState()
 
     when (val result = model.movies) {
         is Result.Success -> println(result.data)

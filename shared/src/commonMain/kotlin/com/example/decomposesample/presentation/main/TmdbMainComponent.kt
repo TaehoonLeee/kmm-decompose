@@ -5,6 +5,7 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.example.decomposesample.presentation.main.store.TmdbStore
 import com.example.decomposesample.presentation.main.store.TmdbStoreProvider
+import com.example.decomposesample.util.asValue
 
 class TmdbMainComponent(
     componentContext: ComponentContext
@@ -14,7 +15,7 @@ class TmdbMainComponent(
         TmdbStoreProvider().provide()
     }
 
-    override val model = store.states
+    override val model = store.asValue()
 
     override fun onGetMovies(page: Int) {
         store.accept(TmdbStore.Intent.FetchMovies(page))
