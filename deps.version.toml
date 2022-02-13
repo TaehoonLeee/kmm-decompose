@@ -3,12 +3,10 @@
 kotlin = "1.6.10"
 activity = "1.5.0-alpha01"
 androidGradle = "7.0.3"
-kotlinxSerialization = "1.2.2"
+kotlinxSerialization = "1.3.1"
 coroutines = "1.6.0-native-mt"
-koin = "3.1.2"
-sqldelight = "1.5.0"
-decompose = "0.3.1"
-reaktive = "1.1.22"
+koin = "3.1.5"
+decompose = "0.5.1"
 mviKotlin = "3.0.0-beta01"
 ktor = "2.0.0-beta-1"
 compose = "1.2.0-alpha02"
@@ -21,12 +19,9 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradle" }
-sqldelight-gradle-plugin = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqldelight" }
 
 decompose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-extension-compose = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
-
-reaktive = { module = "com.badoo.reaktive:reaktive", version.ref = "reaktive" }
 
 mviKotlin-mviKotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mviKotlin" }
 mviKotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mviKotlin" }
@@ -40,6 +35,7 @@ ktor-okHttp = { module = "io.ktor:ktor-client-okhttp", version.ref= "ktor" }
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor"}
 
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose"}
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose"}
@@ -52,7 +48,6 @@ ktor = [
     "ktor-core",
     "ktor-logging",
     "ktor-serialization",
-    "ktor-okHttp",
     "ktor-negotiation"
 ]
 

@@ -9,7 +9,6 @@ buildscript {
         classpath(deps.android.gradle.plugin)
         classpath(deps.kotlin.gradle.plugin)
         classpath(deps.kotlinx.serialization.plugin)
-        classpath(deps.sqldelight.gradle.plugin)
     }
 }
 

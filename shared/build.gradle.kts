@@ -5,7 +5,6 @@ plugins {
     kotlin("native.cocoapods")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("com.squareup.sqldelight")
     id("kotlin-parcelize")
 }
 
@@ -21,6 +20,28 @@ kotlin {
     }
 
     iosTarget("ios") {}
+
+    ios {
+        binaries {
+            framework {
+                baseName = "shared"
+                linkerOpts.add("-lsqlite3")
+                transitiveExport = true
+                export(deps.decompose.decompose)
+                export(deps.bundles.mviKotlin)
+
+                when (val target = this.compilation.target.name) {
+                    "iosX64" -> {
+
+                    }
+                    "iosArm64" -> {
+
+                    }
+                    else -> error("Unsupported target: $target")
+                }
+            }
+        }
+    }
 
     cocoapods {
         framework {
@@ -43,7 +64,6 @@ kotlin {
                 implementation(deps.kotlinx.serialization.json)
                 api(deps.decompose.decompose)
                 implementation(deps.decompose.extension.compose)
-                implementation(deps.reaktive)
                 implementation(deps.koin.core)
                 implementation(deps.bundles.ktor)
                 implementation(deps.bundles.mviKotlin)
@@ -53,10 +73,18 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(deps.bundles.compose)
+                implementation(deps.ktor.okHttp)
             }
         }
         val androidTest by getting
-        val iosMain by getting
+        val iosMain by getting {
+            dependsOn(commonMain)
+            dependencies {
+                api(deps.decompose.decompose)
+                api(deps.bundles.mviKotlin)
+                implementation(deps.ktor.ios)
+            }
+        }
         val iosTest by getting
     }
 }
@@ -94,20 +122,20 @@ afterEvaluate {
     }
 }
 
-//fun getIosTarget(): String {
-//    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
-//
-//    return if (sdkName.startsWith("iphoneos")) "iosArm64" else "iosX64"
-//}
-//
-//val packForXcode by tasks.creating(Sync::class) {
-//    group = "build"
-//    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-//    val targetName = getIosTarget()
-//    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
-//    inputs.property("mode", mode)
-//    dependsOn(framework.linkTask)
-//    val targetDir = File(buildDir, "xcode-frameworks")
-//    from(framework.outputDirectory)
-//    into(targetDir)
-//}
+fun getIosTarget(): String {
+    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
+
+    return if (sdkName.startsWith("iphoneos")) "iosArm64" else "iosX64"
+}
+
+val packForXcode by tasks.creating(Sync::class) {
+    group = "build"
+    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
+    val targetName = getIosTarget()
+    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
+    inputs.property("mode", mode)
+    dependsOn(framework.linkTask)
+    val targetDir = File(buildDir, "xcode-frameworks")
+    from(framework.outputDirectory)
+    into(targetDir)
+}

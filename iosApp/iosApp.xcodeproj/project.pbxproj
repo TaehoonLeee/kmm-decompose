@@ -10,6 +10,8 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		DD435626B3DFD9CEAECD81AA /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1C5B06298708A51C694E6E /* Pods_iosApp.framework */; };
+		E3441A7C27B90B860048EAA8 /* TmdbRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3441A7B27B90B860048EAA8 /* TmdbRootView.swift */; };
+		E3441A7E27B90B8D0048EAA8 /* TmdbMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3441A7D27B90B8D0048EAA8 /* TmdbMainView.swift */; };
 		E36E7B6C275DA51400F4F421 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E36E7B6B275DA51400F4F421 /* FirebaseAuth */; };
 		E36E7B6E275DA51400F4F421 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E36E7B6D275DA51400F4F421 /* FirebaseDatabase */; };
 		E36E7B70275DA51400F4F421 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E36E7B6F275DA51400F4F421 /* FirebaseFirestore */; };
@@ -23,6 +25,8 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF389E8970186936EA547B21 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
+		E3441A7B27B90B860048EAA8 /* TmdbRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbRootView.swift; sourceTree = "<group>"; };
+		E3441A7D27B90B8D0048EAA8 /* TmdbMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbMainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				E3441A7A27B90B7D0048EAA8 /* ui */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
@@ -85,6 +90,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E3441A7A27B90B7D0048EAA8 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				E3441A7B27B90B860048EAA8 /* TmdbRootView.swift */,
+				E3441A7D27B90B8D0048EAA8 /* TmdbMainView.swift */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -96,6 +110,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				43A67A7FCD2C55E3FE972D1E /* Frameworks */,
+				0CD2500184C0122F28880FCB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -158,6 +173,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0CD2500184C0122F28880FCB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D7AE5BAB409F22305BC0B2F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,8 +219,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3441A7E27B90B8D0048EAA8 /* TmdbMainView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				E3441A7C27B90B860048EAA8 /* TmdbRootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
