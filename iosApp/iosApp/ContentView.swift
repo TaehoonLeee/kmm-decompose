@@ -2,15 +2,13 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greeting()
+	
+    @State
+    private var componentHolder = ComponentHolder {
+        TmdbRootComponent(componentContext: $0)
+    }
 
 	var body: some View {
-		Text(greet)
-	}
-}
-
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
+		Text("greet")
 	}
 }

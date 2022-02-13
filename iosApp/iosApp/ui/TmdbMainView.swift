@@ -6,4 +6,24 @@
 //  Copyright © 2022 orgName. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+import shared
+
+struct MainView : View {
+    
+    private let component: TmdbMain
+    
+    @ObservedObject
+    private var model: ObservableValue<TmdbStoreState>
+    
+    init(_ component: TmdbMain) {
+        self.component = component
+        self.model = ObservableValue(component.model)
+    }
+    
+    var body: some View {
+        VStack {
+            
+        }
+    }
+}
