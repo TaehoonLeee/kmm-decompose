@@ -6,6 +6,7 @@ import com.example.decomposesample.domain.interactor.GetMovieListUseCase
 import com.example.decomposesample.domain.interfaces.repository.TmdbRepository
 import io.ktor.client.*
 import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
@@ -20,9 +21,7 @@ val networkModule = module {
 			}
 		}
 		install(ContentNegotiation) {
-			json(Json {
-				ignoreUnknownKeys = true
-			})
+			json(Json { ignoreUnknownKeys = true })
 		}
 	} }
 

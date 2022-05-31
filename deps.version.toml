@@ -1,31 +1,31 @@
 [versions]
 
-kotlin = "1.6.10"
 activity = "1.5.0-alpha01"
-androidGradle = "7.0.3"
-kotlinxSerialization = "1.3.1"
-coroutines = "1.6.0-native-mt"
+kotlinxSerialization = "1.3.3"
+coroutines = "1.6.2"
 koin = "3.1.5"
-decompose = "0.5.1"
+sqldelight = "1.5.0"
+decompose = "0.6.0-native-compose-01"
+reaktive = "1.1.22"
 mviKotlin = "3.0.0-beta01"
-ktor = "2.0.0-beta-1"
-compose = "1.2.0-alpha02"
+ktor = "2.0.2"
+compose = "1.2.0-beta02"
 
 [libraries]
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlinx-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
-android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradle" }
-
 decompose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
-decompose-extension-compose = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
+decompose-extension-compose = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose" }
+reaktive = { module = "com.badoo.reaktive:reaktive", version.ref = "reaktive" }
 
 mviKotlin-mviKotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mviKotlin" }
 mviKotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mviKotlin" }
+mviKotlin-extensionReaktive = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-reaktive", version.ref = "mviKotlin" }
 mviKotlin-extensionCoroutines = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mviKotlin" }
+mviKotlin-rx = { module = "com.arkivanov.mvikotlin:rx", version.ref = "mviKotlin" }
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
@@ -59,7 +59,7 @@ mviKotlin = [
 
 compose = [
     "compose-ui",
-     "compose-foundation",
-     "compose-material",
-     "compose-runtime"
+    "compose-foundation",
+    "compose-material",
+    "compose-runtime"
 ]
