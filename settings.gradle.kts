@@ -20,3 +20,4 @@ rootProject.name = "Decompose_Sample"
 include(":androidApp")
 include(":shared")
 include(":ui-compose")
+include(":darwin-compose")
