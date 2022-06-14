@@ -7,7 +7,7 @@ kotlin {
 	iosX64("uikitX64") {
 		binaries {
 			executable {
-				entryPoint = "main"
+				entryPoint = "com.example.decomposesample.main"
 				freeCompilerArgs += listOf(
 					"-linker-option", "-framework", "-linker-option", "Metal",
 					"-linker-option", "-framework", "-linker-option", "CoreText",
@@ -22,11 +22,37 @@ kotlin {
 			dependencies {
 				implementation(project(mapOf("path" to ":shared")))
 				implementation(project(mapOf("path" to ":ui-compose")))
-				implementation(compose.ui)
-				implementation(compose.runtime)
 				implementation(compose.material)
 				implementation(compose.foundation)
 			}
+		}
+	}
+}
+
+kotlin.targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+	binaries.all {
+		binaryOptions["memoryModel"] = "experimental"
+		binaryOptions["freezing"] = "disabled"
+	}
+}
+
+compose.experimental {
+	uikit.application {
+		bundleIdPrefix = "com.example"
+		projectName = "DecomposeSample"
+
+		deployConfigurations {
+			simulator("IPhone12Pro") {
+				device = org.jetbrains.compose.experimental.dsl.IOSDevices.IPHONE_12_PRO
+			}
+		}
+	}
+}
+
+kotlin {
+	targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+		binaries.all {
+			freeCompilerArgs += "-Xdisable-phases=VerifyBitcode"
 		}
 	}
 }

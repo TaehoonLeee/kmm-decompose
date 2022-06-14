@@ -6,7 +6,6 @@ plugins {
 dependencies {
     implementation(project(":shared"))
     implementation(project(":ui-compose"))
-    implementation("com.google.android.material:material:1.6.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
 
     implementation(deps.koin.core)

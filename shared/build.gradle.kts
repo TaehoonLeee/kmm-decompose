@@ -96,30 +96,6 @@ android {
     }
 }
 
-//configurations {
-//    create("composeCompiler") {
-//        isCanBeConsumed = false
-//    }
-//}
-//
-//dependencies {
-//    add("composeCompiler", "androidx.compose.compiler:compiler:1.2.0-beta02")
-//}
-//
-//afterEvaluate {
-//    val composeCompilerJar =
-//        project
-//            .configurations
-//            .getByName("composeCompiler")
-//            .resolve()
-//            .firstOrNull()
-//            ?: throw Exception("Please add \"androidx.compose.compiler:compiler\" (and only that) as a \"composeCompiler\" dependency")
-//
-//    project.tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-//        kotlinOptions.freeCompilerArgs += listOf("-Xuse-ir", "-Xplugin=$composeCompilerJar")
-//    }
-//}
-
 fun getIosTarget(): String {
     val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
 

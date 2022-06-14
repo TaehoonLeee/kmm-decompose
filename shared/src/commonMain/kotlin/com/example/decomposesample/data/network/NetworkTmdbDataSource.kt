@@ -21,7 +21,6 @@ class NetworkTmdbDataSource(
                 .body<Movies>()
                 .toResult()
         } catch (e: Exception) {
-            println(e)
             Result.Error(e.message)
         }
     }
