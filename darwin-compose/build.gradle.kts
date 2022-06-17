@@ -22,6 +22,7 @@ kotlin {
 			dependencies {
 				implementation(project(mapOf("path" to ":shared")))
 				implementation(project(mapOf("path" to ":ui-compose")))
+				implementation(deps.ktor.darwin)
 				implementation(compose.material)
 				implementation(compose.foundation)
 			}

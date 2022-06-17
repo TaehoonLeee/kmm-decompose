@@ -80,7 +80,7 @@ kotlin {
             dependencies {
                 api(deps.decompose.decompose)
                 api(deps.bundles.mviKotlin)
-                implementation(deps.ktor.ios)
+                implementation(deps.ktor.darwin)
             }
         }
         val iosTest by getting
