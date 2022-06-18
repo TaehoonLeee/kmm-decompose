@@ -13,6 +13,7 @@ import com.arkivanov.essenty.lifecycle.resume
 import com.arkivanov.essenty.lifecycle.stop
 import com.example.decomposesample.presentation.root.TmdbRootComponent
 import com.example.uicompose.RootContent
+import di.startKoin
 import kotlinx.cinterop.*
 import platform.Foundation.NSStringFromClass
 import platform.UIKit.*
@@ -33,6 +34,10 @@ class SkikoAppDelegate : UIResponder, UIApplicationDelegateProtocol {
 
 	@ObjCObjectBase.OverrideInit
 	constructor() : super()
+
+	init {
+		startKoin()
+	}
 
 	private val lifecycle = LifecycleRegistry()
 
