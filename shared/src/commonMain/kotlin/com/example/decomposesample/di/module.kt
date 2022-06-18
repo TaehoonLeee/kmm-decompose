@@ -1,15 +1,21 @@
 package com.example.decomposesample.di
 
+import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.example.decomposesample.data.network.NetworkTmdbDataSource
 import com.example.decomposesample.data.repository.TmdbRepositoryImpl
 import com.example.decomposesample.domain.interactor.GetMovieListUseCase
 import com.example.decomposesample.domain.interfaces.repository.TmdbRepository
+import com.example.decomposesample.presentation.main.store.TmdbStoreProvider
 import io.ktor.client.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val networkModule = module {
@@ -25,15 +31,20 @@ val networkModule = module {
 		}
 	} }
 
-	single {
-		NetworkTmdbDataSource(get())
-	}
+	singleOf(::NetworkTmdbDataSource)
 }
 
 val repositoryModule = module {
-	single<TmdbRepository> { TmdbRepositoryImpl(get()) }
+	singleOf(::TmdbRepositoryImpl) { bind<TmdbRepository>() }
 }
 
 val interactorModule = module {
-	single { GetMovieListUseCase(get()) }
+	singleOf(::GetMovieListUseCase)
+}
+
+val storeModule = module {
+	singleOf(::DefaultStoreFactory) { bind<StoreFactory>() }
+	singleOf(::TmdbStoreProvider)
+
+	factoryOf(TmdbStoreProvider::provide)
 }
