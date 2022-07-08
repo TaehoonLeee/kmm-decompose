@@ -27,6 +27,7 @@ kotlin {
                 transitiveExport = true
                 export(deps.decompose.decompose)
                 export(deps.bundles.mviKotlin)
+                export(deps.paging)
 
                 when (val target = this.compilation.target.name) {
                     "iosX64" -> {
@@ -50,6 +51,7 @@ kotlin {
             linkerOpts.add("-lsqlite3")
             export(deps.decompose.decompose)
             export(deps.bundles.mviKotlin)
+            export(deps.paging)
             transitiveExport = true
             podfile = project.file("../iosApp/Podfile")
         }
@@ -65,6 +67,7 @@ kotlin {
                 implementation(deps.koin.core)
                 implementation(deps.bundles.ktor)
                 implementation(deps.bundles.mviKotlin)
+                api(deps.paging)
             }
         }
         val commonTest by getting

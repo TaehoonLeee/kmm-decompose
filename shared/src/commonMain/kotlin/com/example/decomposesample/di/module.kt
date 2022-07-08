@@ -16,6 +16,7 @@ import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val networkModule = module {
@@ -35,7 +36,7 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-	singleOf(::TmdbRepositoryImpl) { bind<TmdbRepository>() }
+	singleOf(::TmdbRepositoryImpl) bind TmdbRepository::class
 }
 
 val interactorModule = module {
@@ -43,8 +44,10 @@ val interactorModule = module {
 }
 
 val storeModule = module {
-	singleOf(::DefaultStoreFactory) { bind<StoreFactory>() }
+	singleOf(::DefaultStoreFactory) bind StoreFactory::class
 	singleOf(::TmdbStoreProvider)
 
 	factoryOf(TmdbStoreProvider::provide)
 }
+
+val dataModule = networkModule + repositoryModule + interactorModule + storeModule

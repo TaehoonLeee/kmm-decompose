@@ -1,12 +1,19 @@
 package com.example.decomposesample.presentation.main.store
 
-import com.arkivanov.mvikotlin.core.store.*
+import com.arkivanov.mvikotlin.core.store.Reducer
+import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
+import com.arkivanov.mvikotlin.core.store.Store
+import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.example.decomposesample.data.entity.Movies
-import com.example.decomposesample.data.entity.status.Result
+import com.example.decomposesample.data.entity.Movie
 import com.example.decomposesample.domain.interactor.GetMovieListUseCase
 import com.example.decomposesample.presentation.main.store.TmdbStore.Intent
 import com.example.decomposesample.presentation.main.store.TmdbStore.State
+import com.kuuurt.paging.multiplatform.PagingData
+import com.kuuurt.paging.multiplatform.helpers.cachedIn
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 internal class TmdbStoreProvider(
@@ -18,31 +25,25 @@ internal class TmdbStoreProvider(
         object : TmdbStore, Store<Intent, State, Nothing> by storeFactory.create(
             name = this::class.simpleName,
             initialState = State(),
-            bootstrapper = SimpleBootstrapper(Action.FetchMovies(1)),
+            bootstrapper = SimpleBootstrapper(Action.FetchMovies),
             executorFactory = executor,
             reducer = reducer
         ) {}
 
     private sealed class Action {
-        class FetchMovies(val page: Int) : Action()
+        object FetchMovies : Action()
     }
 
     private sealed class Message {
         data class MoviesFetched(
-            val movies: Result<Movies>
+            val movies: Flow<PagingData<Movie>>
         ) : Message()
     }
 
     private val executor = coroutineExecutorFactory<Intent, Action, Message, State, Nothing> {
         onAction<Action.FetchMovies> { action ->
             launch {
-                dispatch(Message.MoviesFetched(getMovieList(action.page)))
-            }
-        }
-
-        onIntent<Intent.FetchMovies> {
-            launch {
-                dispatch(Message.MoviesFetched(getMovieList(it.page)))
+                dispatch(Message.MoviesFetched(getMovieList()))
             }
         }
     }

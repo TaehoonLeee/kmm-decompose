@@ -6,5 +6,5 @@ class GetMovieListUseCase(
     private val tmdbRepository: TmdbRepository
 ) {
 
-    suspend operator fun invoke(page: Int) = tmdbRepository.getMovieList(page)
+    operator fun invoke() = tmdbRepository.getMovieList()
 }

@@ -1,9 +1,10 @@
 package com.example.decomposesample.domain.interfaces.repository
 
-import com.example.decomposesample.data.entity.Movies
-import com.example.decomposesample.data.entity.status.Result
+import com.example.decomposesample.data.entity.Movie
+import com.kuuurt.paging.multiplatform.PagingData
+import kotlinx.coroutines.flow.Flow
 
 interface TmdbRepository {
 
-    suspend fun getMovieList(page: Int): Result<Movies>
+    fun getMovieList(): Flow<PagingData<Movie>>
 }
